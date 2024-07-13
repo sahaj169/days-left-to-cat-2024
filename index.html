@@ -3,91 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Days Left Calculator</title>
+    <title>Live Countdown Timer</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
             text-align: center;
         }
-
-        h1 {
+        .heading {
+            font-size: 3rem;
+            font-weight: bold;
             margin-bottom: 20px;
         }
-
-        input[type="date"] {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .countdown {
+            font-size: 5rem;
+            margin: 20px;
         }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
+        .label {
+            font-size: 2rem;
+            color: #aaaaaa;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Days Left Calculator</h1>
-        <label for="dateInput">Enter a date:</label>
-        <input type="date" id="dateInput">
-        <button onclick="calculateDays()">Calculate Days Left</button>
-        <p id="result"></p>
+        <div class="heading">Days left to CAT 2024</div>
+        <div class="countdown" id="countdown">
+            <span id="days">00</span><span class="label">Days</span>
+            <span id="hours">00</span><span class="label">Hours</span>
+            <span id="minutes">00</span><span class="label">Minutes</span>
+            <span id="seconds">00</span><span class="label">Seconds</span>
+        </div>
     </div>
+
     <script>
-        function calculateDays() {
-            const dateInput = document.getElementById('dateInput').value;
-            const resultElement = document.getElementById('result');
+        function updateCountdown() {
+            const targetDate = new Date('November 23, 2024 00:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
 
-            if (!dateInput) {
-                resultElement.textContent = "Please enter a date.";
-                return;
-            }
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            const inputDate = new Date(dateInput);
-            const today = new Date();
-
-            // Calculate the difference in milliseconds
-            const diffTime = inputDate - today;
-
-            // Convert the difference from milliseconds to days
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            if (diffDays > 0) {
-                resultElement.textContent = `There are ${diffDays} days left until ${inputDate.toDateString()}.`;
-            } else if (diffDays === 0) {
-                resultElement.textContent = `Today is the day!`;
-            } else {
-                resultElement.textContent = `The date you entered is in the past.`;
-            }
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
         }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to display immediately
     </script>
 </body>
 </html>
