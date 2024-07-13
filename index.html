@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Left Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Days Left Calculator</h1>
+        <label for="dateInput">Enter a date:</label>
+        <input type="date" id="dateInput">
+        <button onclick="calculateDays()">Calculate Days Left</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function calculateDays() {
+            const dateInput = document.getElementById('dateInput').value;
+            const resultElement = document.getElementById('result');
+
+            if (!dateInput) {
+                resultElement.textContent = "Please enter a date.";
+                return;
+            }
+
+            const inputDate = new Date(dateInput);
+            const today = new Date();
+
+            // Calculate the difference in milliseconds
+            const diffTime = inputDate - today;
+
+            // Convert the difference from milliseconds to days
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays > 0) {
+                resultElement.textContent = `There are ${diffDays} days left until ${inputDate.toDateString()}.`;
+            } else if (diffDays === 0) {
+                resultElement.textContent = `Today is the day!`;
+            } else {
+                resultElement.textContent = `The date you entered is in the past.`;
+            }
+        }
+    </script>
+</body>
+</html>
