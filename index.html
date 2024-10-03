@@ -39,15 +39,15 @@
             <span id="days">00</span><span class="label">Days</span>
             <span id="hours">00</span><span class="label">Hours</span>
             <span id="minutes">00</span><span class="label">Minutes</span>
-            <span id="seconds">00</span><span class="label">Seconds</span>
+        
         </div>
         <hr/>
-        <div class="heading">Countdown to CAT 2024</div>
+        <div class="heading">Countdown to CAT 2024 EXAM</div>
         <div class="countdown" id="countdown">
             <span id="days2">00</span><span class="label">Days</span>
             <span id="hours2">00</span><span class="label">Hours</span>
             <span id="minutes2">00</span><span class="label">Minutes</span>
-            <span id="seconds2">00</span><span class="label">Seconds</span>
+          
         </div>
     </div>
 
@@ -62,22 +62,21 @@
             const days = Math.floor(timeLeftTillPref / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeLeftTillPref % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeLeftTillPref % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeftTillPref % (1000 * 60)) / 1000);
-
+           
             document.getElementById('days').textContent = days.toString().padStart(2, '0');
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+           
 
             const days2 = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
             const hours2 = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes2 = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds2 = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        
 
             document.getElementById('days2').textContent = days2.toString().padStart(2, '0');
             document.getElementById('hours2').textContent = hours2.toString().padStart(2, '0');
             document.getElementById('minutes2').textContent = minutes2.toString().padStart(2, '0');
-            document.getElementById('seconds2').textContent = seconds2.toString().padStart(2, '0');
+        
         }
 
         setInterval(updateCountdown, 1000);
